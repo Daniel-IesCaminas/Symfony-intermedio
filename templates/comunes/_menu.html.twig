@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="">Tareas</a>
+  <button class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    {% if is_granted('ROLE_USER') %}
+       <li class="nav-item active">
+        <a class="nav-link" href="{{ path('app_tarea_new')}}">
+          Crear
+        </a>
+      </li>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ path('app_user_index')}}">
+          Listado Usuarios
+        </a>
+      </li>
+    {% endif %}
+    {% if app.user %}
+           <li class="nav-item active">
+      <a class="nav-link" href="{{ path('app_logout')}}">
+          Cerrar Sesion ({{app.user.email}}) - ({{app.user.ultimoAcceso|date("d/m/Y")}})
+        </a>
+     </li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
